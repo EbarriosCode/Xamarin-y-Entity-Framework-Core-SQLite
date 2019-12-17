@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:ViewModel="clr-namespace:XamEFCore.ViewModels"
+    x:Class="XamEFCore.Views.MainPage"
+    Title="Xamarin Forms">
+
+    <ContentPage.BindingContext>
+        <ViewModel:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout        
+        Margin="10,10,10,10">
+        <StackLayout
+            Orientation="Horizontal">
+            <Frame
+                CornerRadius="20"
+                WidthRequest="50"
+                HeightRequest="50"
+                HorizontalOptions="Start">
+                <Image
+                    Source="monkey.png"
+                    WidthRequest="200"
+                    HeightRequest="200"/>
+            </Frame>
+            <Label
+                Text="Xamarin + EF Core"
+                VerticalOptions="CenterAndExpand"
+                FontSize="Large"
+                FontAttributes="Italic"
+                Margin="20"
+                HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+
+        <StackLayout             
+            BackgroundColor="#0080FF"
+            Padding="5,5,5,5"
+            Margin="0,5,0,5">
+            <Label
+                Text="SELECCIONE LA OPCIÓN A REALIZAR"
+                TextColor="White"            
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"/>
+        </StackLayout>
+        
+
+        <ListView
+            ItemsSource="{Binding Menu}"
+            HasUnevenRows="True"            
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            CornerRadius="20"
+                            HasShadow="True"
+                            Margin="3">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectMenuItemCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Label 
+                                    Text="{Binding Id}"
+                                    IsVisible="False"/>
+                                <Label 
+                                    Text="{Binding Option}"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"/>
+                                <Image 
+                                    Source="ic_chevron_right"
+                                    HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentPage>
